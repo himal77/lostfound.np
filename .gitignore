@@ -13,7 +13,7 @@
 *.tar.gz
 *.rar
 
-# 
+# ignore jpg file
 *.jpg
 
 target
