@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/items")
 public class ItemController {
-
     private List<Item> items = new ArrayList<>();
 
     @PostMapping
@@ -29,20 +28,49 @@ public class ItemController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteItem (@PathVariable ("id") String id){
+    public ResponseEntity<String> deleteItem(@PathVariable("id") String id) {
         Item itemToDelete = null;
-        for(Item item: items){
-            if(item.getId().equals(id)){
+        for (Item item : items) {
+            if (item.getId().equals(id)) {
                 itemToDelete = item;
                 break;
             }
         }
-        if(itemToDelete != null){
+        if (itemToDelete != null) {
             items.remove(itemToDelete);
             log.info("Item with ID " + id + " deleted");
             return ResponseEntity.ok().body("Item with ID " + id + " deleted!");
-        }else{
+        } else {
             log.info("Item with ID " + id + " not found!");
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{itemId}")
+    public ResponseEntity<String> updateItem(@PathVariable String itemId, @RequestBody Item updatedItem) {
+        Item itemToUpdate = null;
+
+        for (Item item : items) {
+            if (item.getId().equals(itemId)) {
+                itemToUpdate = item;
+                break;
+            }
+        }
+
+        if (itemToUpdate != null) {
+            itemToUpdate.setCategory(updatedItem.getName());
+            itemToUpdate.setDescription(updatedItem.getDescription());
+            itemToUpdate.setCategory(updatedItem.getCategory());
+            itemToUpdate.setColor(updatedItem.getColor());
+            itemToUpdate.setBrand(updatedItem.getBrand());
+            itemToUpdate.setLostDate(updatedItem.getLostDate());
+            itemToUpdate.setFoundDate(updatedItem.getFoundDate());
+            itemToUpdate.setLostLocation(updatedItem.getLostLocation());
+
+            log.info("Item with ID " + itemId + "  updated");
+            return ResponseEntity.ok().body("Item with ID " + itemId + " updated!");
+        } else {
+            log.info("Item with ID " + itemId + " not found!");
             return ResponseEntity.notFound().build();
         }
     }
