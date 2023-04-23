@@ -1,15 +1,12 @@
 package np.com.lostfound.Controller;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import np.com.lostfound.model.Item;
 import np.com.lostfound.service.ItemService;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
-@Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/items")

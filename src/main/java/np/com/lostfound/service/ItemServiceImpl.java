@@ -1,14 +1,12 @@
 package np.com.lostfound.service;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import np.com.lostfound.dao.ItemRepository;
 import np.com.lostfound.model.Item;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
 @Service
 @AllArgsConstructor
 public class ItemServiceImpl implements ItemService {
@@ -27,7 +25,11 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getItemsById(String itemID) {
-        return itemRepository.findById(itemID).get();
+        if (itemRepository.existsById(itemID)) {
+            return itemRepository.findById(itemID).get();
+        } else {
+            return null;
+        }
     }
 
     @Override
