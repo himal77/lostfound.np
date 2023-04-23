@@ -1,18 +1,18 @@
 package np.com.lostfound.Controller;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
 import np.com.lostfound.model.Item;
 import np.com.lostfound.service.ItemService;
-import np.com.lostfound.service.ItemServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @RestController
+@AllArgsConstructor
 @RequestMapping("api/v1/items")
 public class ItemController {
-    private ItemService itemService = new ItemServiceImpl();
+
+    private final ItemService itemService;
 
     @PostMapping
     private Item createItem(@RequestBody final Item item) {
