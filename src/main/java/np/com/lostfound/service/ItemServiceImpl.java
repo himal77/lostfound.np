@@ -3,6 +3,7 @@ package np.com.lostfound.service;
 import lombok.AllArgsConstructor;
 import np.com.lostfound.dao.ItemRepository;
 import np.com.lostfound.model.Item;
+import np.com.lostfound.model.vo.ItemStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,5 +41,17 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void deleteItem(String itemId) {
         itemRepository.deleteById(itemId);
+    }
+
+    @Override
+    public ItemStatus getStatusById(String itemId) {
+        return itemRepository.findById(itemId).get().getStatus();
+    }
+
+    @Override
+    public void changeStatusById(String itemId, ItemStatus itemStatus) {
+        Item item = itemRepository.findById(itemId).get();
+        item.setStatus(itemStatus);
+        saveItem(item);
     }
 }

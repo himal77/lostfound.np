@@ -1,6 +1,6 @@
 package np.com.lostfound.model.vo;
 
-public enum STATUS {
+public enum ItemStatus {
     LOST,
     FOUND,
     RETURNED

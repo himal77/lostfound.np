@@ -2,6 +2,7 @@ package np.com.lostfound.Controller;
 
 import lombok.AllArgsConstructor;
 import np.com.lostfound.model.Item;
+import np.com.lostfound.model.vo.ItemStatus;
 import np.com.lostfound.service.ItemService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,5 +47,15 @@ public class ItemController {
     @PutMapping("/{itemId}")
     private Item putItem(@PathVariable String itemId, @RequestBody Item updatedItem) {
         return itemService.updateItem(itemId, updatedItem);
+    }
+
+    @PutMapping("/{itemId}/changeStatus")
+    private void changeStatus(@PathVariable String itemId, @RequestBody ItemStatus itemStatus) {
+         itemService.changeStatusById(itemId, itemStatus);
+    }
+
+    @GetMapping("/{itemId}/status")
+    private ItemStatus getStatus(@PathVariable String itemId) {
+        return itemService.getStatusById(itemId);
     }
 }
