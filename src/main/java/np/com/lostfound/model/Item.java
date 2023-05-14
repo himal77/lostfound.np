@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import np.com.lostfound.model.vo.ItemStatus;
 
 @Entity
 @Table(name = "Items")
@@ -19,4 +20,5 @@ public class Item {
     private String lostDate;
     private String foundDate;
     private String lostLocation;
+    private ItemStatus status;
 }
